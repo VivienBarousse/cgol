@@ -1,9 +1,25 @@
+(use '[clojure.string :only (split-lines)])
+
 (def board2 [
     [0, 0, 0, 0, 0],
     [0, 0, 1, 0, 0],
     [0, 0, 1, 0, 0],
     [0, 0, 1, 0, 0],
     [0, 0, 0, 0, 0]])
+
+(defn readBoard
+    [filename]
+    (defn readLine
+        [line]
+        (for [c (.toCharArray line)]
+            (if (= (int c) 35) ; 35 is #
+                1
+                0
+            )
+        )
+    )
+    (map readLine (split-lines (slurp filename)))
+)
 
 (defn cgol
     [brd]
