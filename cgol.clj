@@ -17,6 +17,14 @@
 (defn cgol
     [brd]
 
+    (defn line
+        [y]
+        (nth brd y))
+
+    (defn cell
+        [x y]
+        (nth (line y) x))
+
     (defn neighbours
         [x y]
         (for [i [(- x 1) x (+ x 1)]
@@ -25,9 +33,9 @@
                   (or (not (= x i)) (not (= y j)))
                   (>= i 0)
                   (>= j 0)
-                  (< i (count brd))
-                  (< j (count (nth brd i)))
-                  (= 1 (nth (nth brd j) i)))]
+                  (< j (count brd))
+                  (< i (count (nth brd j)))
+                  (= 1 (cell i j)))]
             [i j]
         )
     )
@@ -36,14 +44,6 @@
         [x y]
         (count (neighbours x y))
     )
-
-    (defn line
-        [y]
-        (nth brd y))
-
-    (defn cell
-        [x y]
-        (nth (line y) x))
 
     (defn buildLine
         [y]
