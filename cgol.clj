@@ -89,4 +89,11 @@
         (playGol (- occurences 1) newBrd)
     )
 )
-(println (playGol 100 (readBoard (nth *command-line-args* 0))))
+
+;; This function parses an integer in a string using the JDK bultin operations
+(defn parse-integer
+    [str]
+    (Integer/parseInt str)
+)
+
+(println (playGol (parse-integer (nth *command-line-args* 1)) (readBoard (nth *command-line-args* 0))))
